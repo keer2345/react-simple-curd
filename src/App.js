@@ -1,70 +1,68 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Component } from "react";
+import "./App.css";
 
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul>
+import ProductItem from "./productsItem";
 
-      <hr />
+const products = [
+  {
+    name: "ipad",
+    price: 200
+  },
+  {
+    name: "iphone",
+    price: 650
+  }
+];
 
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
-    </div>
-  </Router>
-);
+localStorage.setItem("products", JSON.stringify(products));
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: JSON.parse(localStorage.getItem("products"))
+    };
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
+    this.onDelete = this.onDelete.bind(this);
+  }
 
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>Components</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-      </li>
-    </ul>
+  componentWillMount() {
+    const products = this.getProducts();
+    this.setState({ products });
+  }
 
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route
-      exact
-      path={match.url}
-      render={() => <h3>Please select a topic.</h3>}
-    />
-  </div>
-);
+  getProducts() {
+    return this.state.products;
+  }
+  onDelete(name) {
+    const products = this.getProducts();
 
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-);
+    const filterProducts = products.filter(product => {
+      return product.name !== name;
+    });
 
-export default BasicExample;
+    // console.log(filterProducts);})
+    this.setState({ products: filterProducts });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Products Manager</h1>
+        {this.state.products.map(product => {
+          return (
+            <ProductItem
+              key={product.name}
+              // name={product.name}
+              // price={product.price}
+              {...product}
+              onDelete={this.onDelete}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+}
+
+export default App;
