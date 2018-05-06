@@ -417,12 +417,20 @@ export default App;
 
 # React Router
 ```
-npm i -S react-route
+npm i -S react-router react-route-dom
 ```
-Copy code from [React Training / Router](https://reacttraining.com/react-router/web/example/basic) to *App.js*
+Copy code from [React Training / Router](https://reacttraining.com/react-router/web/example/basic) to *App.js*.
+
+Then, we can see three pages:
+1. home
+1. about
+1. topics
+    - Rendering with react
+    - Components
+    - Props v. State
 
 
-22) 32:56 - Simple CRUD app: GET
+# Simple CRUD app: GET
 23) 37:37 - Simple CRUD app: DELETE
 24) 44:29 - Simple CRUD app: ADD
 25) 49:33 - Simple CRUD app: EDIT﻿
