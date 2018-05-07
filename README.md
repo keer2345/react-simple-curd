@@ -5,6 +5,9 @@
 npm i create-react-app -g
 
 create-react-app react-simple-crud
+
+cd react-simple-crud
+yarn start
 ```
 # Render and JSX syntax
 *App.js*:
@@ -431,6 +434,6 @@ Then, we can see three pages:
 
 
 # Simple CRUD app: GET
-23) 37:37 - Simple CRUD app: DELETE
-24) 44:29 - Simple CRUD app: ADD
-25) 49:33 - Simple CRUD app: EDIT﻿
+# Simple CRUD app: DELETE
+# Simple CRUD app: ADD
+# Simple CRUD app: EDIT
