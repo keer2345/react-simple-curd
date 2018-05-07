@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import ProductItem from "./ProductItem";
+import ProductAdd from "./ProductAdd";
 
 const products = [
   {
@@ -24,6 +25,7 @@ class App extends Component {
     };
 
     this.onDelete = this.onDelete.bind(this);
+    this.onAdd = this.onAdd.bind(this);
   }
 
   componentWillMount() {
@@ -45,10 +47,22 @@ class App extends Component {
     this.setState({ products: filterProducts });
   }
 
+  onAdd(name, price) {
+    // const products = this.getProducts();
+    const products = this.getProducts();
+    products.push({
+      name,
+      price
+    });
+
+    this.setState({ products });
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Products Manager</h1>
+        <ProductAdd onAdd={this.onAdd} />
         {this.state.products.map(product => {
           return (
             <ProductItem
