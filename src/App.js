@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import ProductItem from "./productsItem";
+import ProductItem from "./ProductItem";
 
 const products = [
   {
